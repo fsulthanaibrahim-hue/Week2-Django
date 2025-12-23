@@ -1,0 +1,32 @@
+{% extends 'hospital/base.html' %}
+
+{% block content %}
+<div class="hero">
+    <h2>Welcome to Hospital Management System</h2>
+    <p>Manage departments, doctors, patients, and appointments easily.</p>
+
+    <div class="cards">
+
+        <a href="{% url 'departments' %}" class="card">
+            <h3>Departments</h3>
+            <p>View hospital departments.</p>
+        </a>
+
+        <a href="{% url 'doctors' %}" class="card">
+            <h3>Doctors</h3>
+            <p>Browse doctors.</p>
+        </a>
+
+        <a href="{% url 'patients' %}" class="card">
+            <h3>Patients</h3>
+            <p>Manage patients.</p>
+        </a>
+
+        <a href="{% url 'booking' %}" class="card">
+            <h3>Appointments</h3>
+            <p>Book appointments.</p>
+        </a>
+
+    </div>
+</div>
+{% endblock %}

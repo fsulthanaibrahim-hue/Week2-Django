@@ -1,0 +1,23 @@
+{% extends "hospital/base.html" %}
+
+{% block content %}
+<div class="hero">
+    <h2>Departments & Doctors</h2>
+
+    {% for department in departments %}
+        <div class="card" style="margin-bottom: 20px;">
+            <h3>{{ department.name }}</h3>
+            
+            {% if department.doctor_set.all %}
+                <ul>
+                    {% for doctor in department.doctor_set.all %}
+                        <li>Dr. {{ doctor.name }} - {{ doctor.department.name }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No doctors available.</p>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

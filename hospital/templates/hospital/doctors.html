@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="hero">
+    <h2>All Doctors</h2>
+
+    {% for doctor in doctors %}
+        <div class="card" style="margin-bottom:15px;">
+            <strong>Dr. {{ doctor.name }}</strong><br>
+            Department: {{ doctor.department.name }}
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
