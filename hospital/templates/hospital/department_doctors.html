@@ -1,0 +1,61 @@
+{% extends "hospital/base.html" %}
+
+{% block content %}
+
+<!-- PAGE TITLE -->
+<h2 style="
+    text-align:center;
+    margin:40px 0;
+    font-size:32px;
+    font-weight:600;
+">
+    Doctors in {{ department.name }}
+</h2>
+
+<!-- DOCTOR CARDS -->
+<div style="
+    display:flex;
+    flex-wrap:wrap;
+    gap:30px;
+    justify-content:center;
+    margin-bottom:60px;
+">
+    {% for doctor in doctors %}
+    <div style="
+        width:260px;
+        background:white;
+        padding:30px;
+        border-radius:14px;
+        text-align:center;
+        box-shadow:0 8px 22px rgba(0,0,0,0.1);
+        transition:transform 0.2s;
+    ">
+        <div style="
+            width:70px;
+            height:70px;
+            margin:0 auto 15px;
+            background:#1977cc;
+            color:white;
+            border-radius:50%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:30px;
+        ">
+            👨‍⚕️
+        </div>
+
+        <h3 style="margin:10px 0;">
+            {{ doctor.name }}
+        </h3>
+
+        <p style="color:#1977cc; font-weight:600;">
+            {{ department.name }}
+        </p>
+    </div>
+    {% empty %}
+    <p>No doctors available in this department.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}

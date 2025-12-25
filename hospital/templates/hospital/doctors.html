@@ -21,7 +21,9 @@
                    color:white;
                    font-weight:bold;
                    border-radius:6px;
-               ">Search</button>
+               ">
+            Search
+        </button>
     </form>
 </div>
 
@@ -37,9 +39,16 @@
             text-align:center;
         ">
             <h3>{{ doctor.name }}</h3>
+
             <p style="color:#1977cc; font-weight:600;">
                 {{ doctor.department.name }}
             </p>
+
+            <!-- ✅ CORRECT PLACE FOR LINK -->
+            <a href="{% url 'department_doctors' doctor.department.id %}"
+               style="text-decoration:none; color:#1977cc; font-weight:500;">
+                View Department Doctors
+            </a>
         </div>
     {% empty %}
         <p>No doctors found.</p>
@@ -47,3 +56,4 @@
 </div>
 
 {% endblock %}
+
