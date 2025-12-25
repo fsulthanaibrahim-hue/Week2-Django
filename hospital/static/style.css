@@ -1,7 +1,14 @@
 body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
     margin: 0;
     font-family: Arial, sans-serif;
     background: #f4f6f8;
+}
+
+.main-content {
+    flex: 1;
 }
 
 .header {
@@ -23,6 +30,7 @@ body {
 main {
     margin-top: 120px;
     padding: 20px;
+    display: flex;
 }
 
 .hero {
@@ -48,8 +56,108 @@ main {
 }
 
 .footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    background-color: #f1f1f1;
+    color: #333;
+    position: relative;
+    width: 100%;
+}
+
+.dept-section {
+    padding: 60px 40px;
+    background: #f8fbff;
+}
+
+.section-title {
     text-align: center;
-    padding: 15px;
-    margin-top: 40px;
-    color: #777;
+    font-size: 30px;
+    margin-bottom: 40px;
+}
+
+/* Cards container */
+.dept-cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+/* Individual card */
+.dept-card {
+    background: #ffffff;
+    width: 260px;
+    padding: 35px 25px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+    transition: 0.3s ease;
+}
+
+.dept-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Icon */
+.dept-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 20px;
+    background: #1977cc;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+}
+
+/* Text */
+.dept-card h3 {
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.dept-card p {
+    color: #666;
+    font-size: 14px;
+}
+
+
+.appointment-section {
+    padding: 60px 20px;
+    background: #f8fbff;
+    text-align: center;
+}
+
+.appointment-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.appointment-form input,
+.appointment-form select,
+.appointment-form button {
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.appointment-form button {
+    background-color: #1e6cff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.appointment-form button:hover {
+    background-color: #1455aa;
 }

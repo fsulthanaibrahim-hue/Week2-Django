@@ -55,7 +55,7 @@ ROOT_URLCONF = 'hospitalproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],   # empty ok
+        'DIRS': [],   # empty ok
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -1,14 +1,48 @@
-{% extends 'base.html' %}
+{% extends "hospital/base.html" %}
+
 {% block content %}
+<div style="text-align:center; margin:30px 0;">
+    <h2>Our Doctors</h2>
 
-<div class="hero">
-    <h2>All Doctors</h2>
+    <!-- SEARCH FORM -->
+    <form method="get" action="{% url 'all_doctors' %}" style="margin-bottom:30px;">
+        <input type="text" name="q" placeholder="Search by doctor or department"
+               value="{{ query }}" style="
+                   padding:10px 15px;
+                   width:300px;
+                   border-radius:6px;
+                   border:1px solid #ccc;
+                   font-size:14px;
+               ">
+        <button type="submit" style="
+                   padding:10px 15px;
+                   border:none;
+                   background:#1977cc;
+                   color:white;
+                   font-weight:bold;
+                   border-radius:6px;
+               ">Search</button>
+    </form>
+</div>
 
+<!-- DOCTOR CARDS -->
+<div style="display:flex; flex-wrap:wrap; gap:25px; justify-content:center;">
     {% for doctor in doctors %}
-        <div class="card" style="margin-bottom:15px;">
-            <strong>Dr. {{ doctor.name }}</strong><br>
-            Department: {{ doctor.department.name }}
+        <div style="
+            width:260px;
+            background:#fff;
+            padding:20px;
+            border-radius:12px;
+            box-shadow:0 6px 18px rgba(0,0,0,0.1);
+            text-align:center;
+        ">
+            <h3>{{ doctor.name }}</h3>
+            <p style="color:#1977cc; font-weight:600;">
+                {{ doctor.department.name }}
+            </p>
         </div>
+    {% empty %}
+        <p>No doctors found.</p>
     {% endfor %}
 </div>
 

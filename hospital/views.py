@@ -4,10 +4,38 @@ from .models import Department, Doctor, Patient, Booking
 def home(request):
     return render(request, 'hospital/home.html')
 
+
+def all_doctors(request):
+    query = request.GET.get('q', '')  # get the search query
+    if query:
+        doctors = Doctor.objects.filter(
+            name__icontains=query
+        ) | Doctor.objects.filter(
+            department__name__icontains=query
+        )
+    else:
+        doctors = Doctor.objects.all()
+    return render(request, "hospital/doctors.html", {
+        "doctors": doctors,
+        "query": query
+    })
+
+
 def departments(request):
-    # Fetch all departments with their doctors
-    departments = Department.objects.prefetch_related('doctor_set').all()
+    departments = Department.objects.prefetch_related('doctors').all()
+    print(departments)
+    for i in departments:
+        print(i)
     return render(request, 'hospital/departments.html', {'departments': departments})
+
+def department_doctors(request, department_id):
+    department = get_object_or_404(Department, id=department_id)
+    doctors = Doctor.objects.filter(department=department)
+    context = {
+        'department': department,
+        'doctors': doctors
+    }
+    return render(request, 'hospital/department_doctors.html', context)
 
 def doctors(request):
     doctors = Doctor.objects.select_related('department').all()

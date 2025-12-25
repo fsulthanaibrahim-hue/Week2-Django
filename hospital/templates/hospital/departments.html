@@ -1,23 +1,37 @@
 {% extends "hospital/base.html" %}
-
 {% block content %}
-<div class="hero">
-    <h2>Departments & Doctors</h2>
 
+<h2 style="text-align:center; margin:20px 0;">Our Departments</h2>
+
+<div style="display:flex; flex-wrap:wrap; gap:30px; justify-content:center;">
     {% for department in departments %}
-        <div class="card" style="margin-bottom: 20px;">
+    <a href="{% url 'department_doctors' department.id %}" style="text-decoration:none; color:inherit;">
+        <div style="
+            width:260px;
+            background:white;
+            padding:30px;
+            border-radius:14px;
+            text-align:center;
+            box-shadow:0 8px 22px rgba(0,0,0,0.1);
+        ">
+            <div style="
+                width:60px;
+                height:60px;
+                margin:0 auto 20px;
+                background:#1977cc;
+                color:white;
+                border-radius:50%;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                font-size:26px;
+            ">🏥</div>
+
             <h3>{{ department.name }}</h3>
-            
-            {% if department.doctor_set.all %}
-                <ul>
-                    {% for doctor in department.doctor_set.all %}
-                        <li>Dr. {{ doctor.name }} - {{ doctor.department.name }}</li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <p>No doctors available.</p>
-            {% endif %}
+            <p>{{ department.doctor_set.count }} Doctors Available</p>
         </div>
+    </a>
     {% endfor %}
 </div>
+
 {% endblock %}
