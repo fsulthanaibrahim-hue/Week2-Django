@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Department, Doctor, Patient, Booking
+from django.contrib.auth.decorators import login_required
 
 def home(request):
     return render(request, 'hospital/home.html')
@@ -65,3 +66,10 @@ def booking(request):
 
 def booking_success(request):
     return render(request, 'hospital/booking_success.html')
+
+
+@login_required
+def departments_list(request):
+    departments = Department.objects.all()
+    return render(request, 'hospital/departments_list.html', {'departments': departments})
+

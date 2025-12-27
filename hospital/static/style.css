@@ -12,12 +12,34 @@ body {
 }
 
 .header {
-    background: #1e6cff;
-    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1e6cff;
+    padding: 30px 60px;
     color: white;
-    position: fixed;
-    width: 100%;
-    top: 0;
+}
+
+.head-left h1 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.head-right a.auth-btn {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 12px 18px;
+    border-radius: 5px;
+    background-color: #1455aa;
+}
+
+.head-right a.auth-btn:hover {
+    background-color: #0f3f7a;
+}
+
+.head-right span {
+    font-weight: bold;
 }
 
 .header nav a {
@@ -28,7 +50,7 @@ body {
 }
 
 main {
-    margin-top: 120px;
+    margin-top: 70px;
     padding: 20px;
     display: flex;
 }
@@ -161,3 +183,16 @@ main {
 .appointment-form button:hover {
     background-color: #1455aa;
 }
+
+.login-container input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-container button:hover {
+    background-color: #1455aa;
+    cursor: pointer;
+}
+
+
+
