@@ -79,10 +79,16 @@ WSGI_APPLICATION = 'hospitalproject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'hospital_db',
+        'USER': 'postgres',
+        'PASSWORD': 'fullstack',  # the same password you set
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
+
+
 
 
 # Password validation
