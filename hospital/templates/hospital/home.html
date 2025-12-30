@@ -2,17 +2,21 @@
 
 {% block content %}
 <div class="hero">
-    <h2>Welcome to Hospital Management System</h2>
-    <p>Manage departments, doctors, patients, and appointments easily.</p>
+    {% if request.user.is_authenticated %}
+        <h2>{{ request.session.welcome_message }}</h2>
+        <p><a href="{% url 'logout' %}">Logout</a></p>
+    {% else %}
+        <h2>Welcome to Hospital Management System</h2>
+        <p><a href="{% url 'login' %}">Login</a></p>
+    {% endif %}
 
     <div class="cards">
-
         <a href="{% url 'departments' %}" class="card">
             <h3>Departments</h3>
             <p>View hospital departments.</p>
         </a>
 
-        <a href="{% url 'doctors' %}" class="card">
+        <a href="{% url 'all_doctors' %}" class="card">
             <h3>Doctors</h3>
             <p>Browse doctors.</p>
         </a>
@@ -26,7 +30,6 @@
             <h3>Appointments</h3>
             <p>Book appointments.</p>
         </a>
-
     </div>
 </div>
 {% endblock %}
