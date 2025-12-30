@@ -4,10 +4,8 @@
 <div class="hero">
     {% if request.user.is_authenticated %}
         <h2>{{ request.session.welcome_message }}</h2>
-        <p><a href="{% url 'logout' %}">Logout</a></p>
     {% else %}
         <h2>Welcome to Hospital Management System</h2>
-        <p><a href="{% url 'login' %}">Login</a></p>
     {% endif %}
 
     <div class="cards">
