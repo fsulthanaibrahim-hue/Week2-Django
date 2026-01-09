@@ -14,7 +14,7 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user:
             login(request, user)
-            request.session['welcome_message'] = f"Welcome, {user.username}!"
+            request.session['user_name'] = {user.username}
             return redirect('home')
         else:
             messages.error(request, "Invalid username or password.")
