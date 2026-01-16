@@ -1,33 +1,47 @@
 {% extends 'hospital/base.html' %}
+{% load static %}
 
 {% block content %}
-<div class="hero">
-    {% if request.user.is_authenticated %}
-        <h2>{{ request.session.welcome_message }}</h2>
-    {% else %}
-        <h2>Welcome to Hospital Management System</h2>
-    {% endif %}
 
-    <div class="cards">
-        <a href="{% url 'departments' %}" class="card">
-            <h3>Departments</h3>
-            <p>View hospital departments.</p>
-        </a>
+<section class="hero-section">
 
-        <a href="{% url 'all_doctors' %}" class="card">
-            <h3>Doctors</h3>
-            <p>Browse doctors.</p>
-        </a>
+    <!-- HERO IMAGE-->
+    <img src="{% static 'images/hero.jpg' %}" alt="Hospital" class="hero-image">
 
-        <a href="{% url 'patients' %}" class="card">
-            <h3>Patients</h3>
-            <p>Manage patients.</p>
-        </a>
+    <!-- OVERLAY -->
+    <div class="hero-overlay"></div>
 
-        <a href="{% url 'booking' %}" class="card">
-            <h3>Appointments</h3>
-            <p>Book appointments.</p>
-        </a>
+    <!-- TEXT -->
+    <div class="hero-content">
+        <h1>Leading the Way in Medical Excellence</h1>
+        <p>Caring for life. Trusted healthcare solutions.</p>
     </div>
-</div>
+
+    <!-- 🔥 GLASS CARDS -->
+    <div class="hero-cards">
+
+        <a href="{% url 'departments' %}" class="hero-card">
+            <div class="icon">🏥</div>
+            <h3>Departments</h3>
+        </a>
+
+        <a href="{% url 'all_doctors' %}" class="hero-card">
+            <div class="icon">👨‍⚕️</div>
+            <h3>Doctors</h3>
+        </a>
+
+        <a href="{% url 'patients' %}" class="hero-card">
+            <div class="icon">🧑‍🤝‍🧑</div>
+            <h3>Patients</h3>
+        </a>
+
+        <a href="{% url 'booking' %}" class="hero-card">
+            <div class="icon">📅</div>
+            <h3>Booking</h3>
+        </a>
+
+    </div>
+
+</section>
+
 {% endblock %}

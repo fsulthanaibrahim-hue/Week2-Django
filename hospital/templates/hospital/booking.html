@@ -1,29 +1,98 @@
 {% extends 'hospital/base.html' %}
 {% block content %}
 
-<h2>Book Appointment</h2>
+<style>
+    body {
+        background: #f4f6f9; /* subtle gray background */
+    }
 
-<form method="post">
-{% csrf_token %}
+    .booking-container {
+        max-width: 500px;
+        margin: 60px auto;
+        background: #ffffff;
+        padding: 40px 30px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-<input type="text" name="patient_name" placeholder="Patient Name" required> <br><br>
-<input type="number" name="age" placeholder="Age" required> <br><br> 
-<input type="text" name="disease" placeholder="Disease" required> <br><br>
+    .booking-container h2 {
+        text-align: center;
+        color: #1977cc;
+        font-size: 28px;
+        margin-bottom: 30px;
+        font-weight: 600;
+    }
 
-<select name="doctor" required>
-    <option value="">Select Doctor</option>
-    {% for doctor in doctors %}
-        <option value="{{ doctor.id }}">
-            Dr. {{ doctor.name }} ({{ doctor.department.name }})
-        </option>
-    {% endfor %}
-</select> <br><br>
+    .booking-container input,
+    .booking-container select {
+        width: 100%;
+        padding: 14px 15px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 15px;
+        transition: all 0.3s;
+    }
 
+    .booking-container input:focus,
+    .booking-container select:focus {
+        outline: none;
+        border-color: #1977cc;
+        box-shadow: 0 0 6px rgba(25,119,204,0.3);
+    }
 
-<input type="date" name="date" required> <br><br>
-<input type="text" name="phone" placeholder="Phone" required> <br><br>
+    .booking-container button {
+        width: 100%;
+        padding: 14px;
+        background: #1977cc;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
 
-<button type="submit">Submit</button>
-</form>
+    .booking-container button:hover {
+        background: #155fa0;
+    }
+
+    /* Responsive for mobile */
+    @media (max-width: 600px) {
+        .booking-container {
+            margin: 30px 20px;
+            padding: 30px 20px;
+        }
+    }
+</style>
+
+<div class="booking-container">
+    <h2>📅 Book an Appointment</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <input type="text" name="patient_name" placeholder="Patient Name" required>
+        <input type="number" name="age" placeholder="Age" required>
+        <input type="text" name="disease" placeholder="Disease" required>
+
+        <select name="doctor" required>
+            <option value="">Select Doctor</option>
+            {% for doctor in doctors %}
+                <option value="{{ doctor.id }}">
+                    {{ doctor.name }} ({{ doctor.department.name }})
+                </option>
+            {% endfor %}
+        </select>
+
+        <input type="date" name="date" required>
+        <input type="text" name="phone" placeholder="Phone Number" required>
+
+        <button type="submit">Book Appointment</button>
+    </form>
+</div>
 
 {% endblock %}
+    

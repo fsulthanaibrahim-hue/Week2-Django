@@ -5,32 +5,21 @@
     <h2>Our Doctors</h2>
 
     <!-- SEARCH FORM -->
-    <form method="get" action="{% url 'all_doctors' %}" style="margin-bottom:30px;">
-        <input type="text" name="q" placeholder="Search by doctor or department"
-               value="{{ query }}" style="
-                   padding:10px 15px;
-                   width:300px;
-                   border-radius:6px;
-                   border:1px solid #ccc;
-                   font-size:14px;
-               ">
-        <button type="submit" style="
-                   padding:10px 15px;
-                   border:none;
-                   background:#1977cc;
-                   color:white;
-                   font-weight:bold;
-                   border-radius:6px;
-               ">
-            Search
-        </button>
-    </form>
+    <input type="text" id="search-input" placeholder="Search by doctor or department"
+           style="
+               padding:10px 15px;
+               width:300px;
+               border-radius:6px;
+               border:1px solid #ccc;
+               font-size:14px;
+               margin-bottom:30px;
+           ">
 </div>
 
 <!-- DOCTOR CARDS -->
-<div style="display:flex; flex-wrap:wrap; gap:25px; justify-content:center;">
+<div id="doctors-container" style="display:flex; flex-wrap:wrap; gap:25px; justify-content:center;">
     {% for doctor in doctors %}
-        <div style="
+        <div class="doctor-card" style="
             width:260px;
             background:#fff;
             padding:20px;
@@ -44,15 +33,34 @@
                 {{ doctor.department.name }}
             </p>
 
-            <!-- ✅ CORRECT PLACE FOR LINK -->
             <a href="{% url 'department_doctors' doctor.department.id %}"
                style="text-decoration:none; color:#1977cc; font-weight:500;">
                 View Department Doctors
             </a>
         </div>
-    {% empty %}
-        <p>No doctors found.</p>
     {% endfor %}
 </div>
 
+<script>
+// Get input and container
+const searchInput = document.getElementById('search-input');
+const doctorsContainer = document.getElementById('doctors-container');
+
+// Add event listener
+searchInput.addEventListener('input', function() {
+    const query = this.value.toLowerCase();
+    const cards = document.querySelectorAll('.doctor-card');
+
+    cards.forEach(card => {
+        const name = card.querySelector('h3').innerText.toLowerCase();
+        const dept = card.querySelector('p').innerText.toLowerCase();
+
+        if (name.includes(query) || dept.includes(query)) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+});
+</script>
 {% endblock %}

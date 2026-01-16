@@ -12,6 +12,12 @@ urlpatterns = [
     path('doctors/', views.doctors_list, name='doctors'),
     
     path('patients/', views.patients, name='patients'),
+    path('patient/<int:id>/', views.patient_details, name='patient_details'),
+    path('cancel/<int:id>/', views.cancel_appointment, name='cancel_appointment'),
+
     path('booking/', views.booking, name='booking'),
     path('booking-success/', views.booking_success, name='booking_success'),
+
+    path('cancel/<int:id>/', views.cancel_appointment, name='cancel_appointment'),
+
 ]

@@ -28,11 +28,14 @@ class Patient(models.Model):
     def __str__(self):
         return self.name
 
-class Booking(models.Model):
-    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name="bookings")
-    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name="bookings")
-    date = models.DateField()
-    phone = models.CharField(max_length=15)
+
+class MedicalRecord(models.Model):
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, null=True, blank=True)  # Add this
+    phone = models.CharField(max_length=20, null=True, blank=True)  # Add this if you want to store phone
+    date = models.DateField(null=True, blank=True)
+    symptoms = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return f"{self.patient.name} → {self.doctor.name} on {self.date}"
+        return self.patient.name
+

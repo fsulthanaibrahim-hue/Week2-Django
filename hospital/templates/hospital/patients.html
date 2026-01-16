@@ -1,12 +1,91 @@
 {% extends "hospital/base.html" %}
 
 {% block content %}
-<h2>Patients</h2>
-<ul>
-    {% for patient in patients %}
-        <li>{{ patient.name }} – {{ patient.age }} – {{ patient.disease }}</li>
-    {% empty %}
-        <li>No patients available</li>
-    {% endfor %}
-</ul>
+<div style="padding:30px; max-width: 1000px; margin: auto;">
+    <h2 style="color:#1977cc; margin-bottom:20px;">Patients</h2>
+
+    <!-- SEARCH FORM -->
+    <form method="get" action="{% url 'patients' %}" id="searchForm"
+          style="margin-bottom:20px; display:flex; gap:10px;">
+        <input type="text" name="q" 
+               placeholder="Search by name, disease..."
+               value="{{ query }}"
+               id="searchInput"
+               style="flex:1; padding:10px 15px; border-radius:6px; border:1px solid #ccc; font-size:14px;">
+    </form>
+
+    <!-- PATIENTS TABLE -->
+    <div id="patientsTable" style="overflow-x:auto;">
+        <table style="width:100%; border-collapse:collapse; font-family:Arial, sans-serif; min-width:800px;">
+            <thead>
+                <tr style="background:#1977cc; color:white; text-align:left;">
+                    <th style="padding:12px;">ID</th>
+                    <th style="padding:12px;">Name</th>
+                    <th style="padding:12px;">Age</th>
+                    <th style="padding:12px;">Disease</th>
+                    <th style="padding:12px;">Appointment Date</th>
+                    <th style="padding:12px;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for patient in patients %}
+                <tr style="border-bottom:1px solid #ddd; transition: background 0.2s;">
+                    <td style="padding:12px;">{{ forloop.counter }}</td>
+                    <td style="padding:12px;">{{ patient.name }}</td>
+                    <td style="padding:12px;">{{ patient.age }}</td>
+                    <td style="padding:12px;">{{ patient.disease }}</td>
+                    <td style="padding:12px;">
+                        {% with patient.medicalrecord_set.first as record %}
+                            {% if record %} {{ record.date|date:"M d, Y" }} {% else %} - {% endif %}
+                        {% endwith %}
+                    </td>
+                    <td style="padding:12px;">
+                        <a href="{% url 'patient_details' patient.id %}" 
+                           style="padding:6px 12px; background:#1977cc; color:white; border-radius:4px; text-decoration:none; margin-right:5px;">
+                            Details
+                        </a>
+                        <a href="{% url 'cancel_appointment' patient.id %}" 
+                           style="padding:6px 12px; background:#e74c3c; color:white; border-radius:4px; text-decoration:none;">
+                            Cancel
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" style="text-align:center; padding:12px; color:#555;">No patients found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Optional hover effect -->
+<style>
+    table tbody tr:hover {
+        background: #f1f1f1;
+    }
+</style>
+
+<!-- Live Search Script -->
+<script>
+const input = document.getElementById('searchInput');
+
+let timeout = null;
+input.addEventListener('input', function() {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+        const query = input.value;
+        fetch("{% url 'patients' %}?q=" + encodeURIComponent(query))
+            .then(response => response.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const table = doc.getElementById('patientsTable').innerHTML;
+                document.getElementById('patientsTable').innerHTML = table;
+            });
+    }, 300); // wait 300ms after typing stops
+});
+</script>
+
 {% endblock %}

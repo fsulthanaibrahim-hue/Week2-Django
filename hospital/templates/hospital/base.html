@@ -1,37 +1,47 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
-
+    <meta charset="UTF-8">
     <title>Hospital Management</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
 
-<div class="header">
-    <div class="head-left">
-        <h1>Hospital Management System</h1>
+<!-- ===== NAVBAR ===== -->
+<header class="navbar">
+    <div class="nav-container">
+        <a href="{% url 'home' %}" class="logo">Hospital Management System</a>
+
+        <nav class="nav-links">
+            <!-- Contact numbers in navbar -->
+
+            {% if user.is_authenticated %}
+                <span class="welcome">Hi, {{ user.username }}</span>
+                <a href="{% url 'logout' %}" class="btn-nav logout">Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn-nav login">Login</a>
+            {% endif %}
+        </nav>
     </div>
+</header>
 
-    <div class="head-right">
-        {% if user.is_authenticated %}
-            <span style="margin-right:15px; color:white;">Welcome, {{ user.username }}</span>
-            <a href="{% url 'logout' %}" class="auth-btn">Logout</a>
-        {% else %}
-            <a href="{% url 'login' %}" class="auth-btn">Login</a>
-        {% endif %}
-    </div>
-</div>
+<!-- ===== PAGE CONTENT ===== -->
+{% block content %}{% endblock %}
 
-<main>
-    {% block content %}{% endblock %}
-</main>
-
+<!-- ===== FOOTER ===== -->
 <footer class="footer">
-     © 2025 Hospital Management System. All rights reserved.
+    <div class="footer-container">
+        <p>© 2025 Hospital Management System</p>
+        <p>Trusted Care • Better Health</p>
+        <p> Contact us: 
+            📞<a href="tel:+919876543210">+91 9876543210</a>&nbsp;&nbsp;&nbsp; 
+            <a href="tel:+919123456780">+91 9123456780</a>    
+        </p>
+    </div>
 </footer>
 
 </body>

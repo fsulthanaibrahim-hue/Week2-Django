@@ -1,14 +1,73 @@
 {% extends 'hospital/base.html' %}
 {% block content %}
-<div class="hero">
+
+<style>
+    .success-container {
+        max-width: 500px;
+        margin: 80px auto;
+        text-align: center;
+        background: #ffffff;
+        padding: 40px 30px;
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        font-family: Arial, sans-serif;
+    }
+
+    .success-container h2 {
+        color: #27ae60; /* green for success */
+        margin-bottom: 15px;
+        font-size: 28px;
+    }
+
+    .success-container p {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 30px;
+    }
+
+    .success-container .btn {
+        display: inline-block;
+        padding: 12px 25px;
+        margin: 5px;
+        border-radius: 6px;
+        border: none;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        text-decoration: none;
+        transition: 0.3s;
+        color: white;
+    }
+
+    .btn-home {
+        background-color: #1977cc; /* blue */
+    }
+    .btn-home:hover {
+        background-color: #155fa0;
+    }
+
+    .btn-book {
+        background-color: #27ae60; /* green */
+    }
+    .btn-book:hover {
+        background-color: #1f8b4d;
+    }
+
+    .btn-patients {
+        background-color: #f39c12; /* orange */
+    }
+    .btn-patients:hover {
+        background-color: #d17f0f;
+    }
+</style>
+
+<div class="success-container">
     <h2>✅ Booking Successful</h2>
     <p>Your appointment has been booked successfully.</p>
+
+    <a href="/" class="btn btn-home">Go to Home</a>
+    <a href="/booking/" class="btn btn-book">Book Another</a>
+    <a href="/patients/" class="btn btn-patients">Patients</a>
 </div>
- <div style="margin-top:100px;">
-        <a href="/"><button type="go to home">Go to Home</button></a> 
 
-        <a href="/booking/"><button type="Book Another">Book Another</button></a>
-    </div>
 {% endblock %}
-
-   
