@@ -107,8 +107,13 @@ def booking_success(request):
 
 @login_required(login_url='login')
 def departments_list(request):
-    departments = Department.objects.all()
-    return render(request, 'hospital/departments_list.html', {
+    if request.method == "POST":
+        name = request.POST.get("name")
+        if name:
+          Department.objects.create(name=name)
+          return redirect("department_list")
+        departmets = Department.objects.all()
+        return render(request, 'hospital/departments_list.html', {
         'departments': departments
     })
 

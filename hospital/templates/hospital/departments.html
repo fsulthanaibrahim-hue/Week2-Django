@@ -3,34 +3,39 @@
 
 <h2 style="text-align:center; margin:20px 0;">Our Departments</h2>
 
+<form method="post" style="text-align:center; margin-bottom:30px;">
+    {% csrf_token %}
+    <input type="text" name="name" placeholder="Enter Department Name" required>
+    <button type="submit">Add Department</button>
+</form>
+
 <div style="display:flex; flex-wrap:wrap; gap:30px; justify-content:center;">
     {% for department in departments %}
-    <a href="{% url 'department_doctors' department.id %}" style="text-decoration:none; color:inherit;">
+    <div style="
+        width:260px;
+        background:white;
+        padding:30px;
+        border-radius:14px;
+        text-align:center;
+        box-shadow:0 8px 22px rgba(0,0,0,0.1);
+    ">
         <div style="
-            width:260px;
-            background:white;
-            padding:30px;
-            border-radius:14px;
-            text-align:center;
-            box-shadow:0 8px 22px rgba(0,0,0,0.1);
-        ">
-            <div style="
-                width:60px;
-                height:60px;
-                margin:0 auto 20px;
-                background:#1977cc;
-                color:white;
-                border-radius:50%;
-                display:flex;
-                align-items:center;
-                justify-content:center;
-                font-size:26px;
-            ">🏥</div>
+            width:60px;
+            height:60px;
+            margin:0 auto 20px;
+            background:#1977cc;
+            color:white;
+            border-radius:50%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:26px;
+        ">🏥</div>
 
-            <h3>{{ department.name }}</h3>
-            <p>{{ department.doctor_set.count }} Doctors Available</p>
-        </div>
-    </a>
+        <h3>{{ department.name }}</h3>
+    </div>
+    {% empty %}
+        <p>No departments yet.</p>
     {% endfor %}
 </div>
 
